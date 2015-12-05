@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>323 Josephine </title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-markdown/css/bootstrap-markdown.min.css') }}"/>
+
+    <!--  Local Style Sheets for markdown and image gallery -->
+
+    <!-- Unused Links
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-img/css/bootstrap-image-gallery.min.css') }}"/>
+    -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='Gallery-master/css/blueimp-gallery.min.css') }}"/>
+
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom/css/custom.css') }}"/>
+
+    <!-- Java scripts -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap-markdown/js/bootstrap-markdown.js')}}"></script>
+
+
+     <!-- Unused Links
+
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="{{ url_for('static', filename='bootstrap-img/js/bootstrap-image-gallery.min.js') }}"></script>
+    -->
+
+
+</head>
+
+<body>
+<div class="container">
+
+<div  class="page-header">
+    <h1>323 Josephine </h1>
+</div>
+
+
+{% block content %}
+{% endblock %}
+
+<div class="modal-footer">
+    <h4>&copy; Laura Dainel & John Edenfield</h4>
+</div>
+
+</div>
+
+</body>
+</html>

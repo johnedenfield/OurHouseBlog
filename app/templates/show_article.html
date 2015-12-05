@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="article">
+
+    <div class="btn-group" role="group" aria-label="...">
+        <a href="{{ url_for('goto_article', id=article.id-1 )}}"
+           type="button" class="btn btn-default">Prev</a>
+        <a href="{{ url_for('index') }}"
+           type="button" class="btn btn-default">Home</a>
+        <a href="{{ url_for('goto_article', id=article.id+1) }}"
+           type="button" class="btn btn-default">Next</a>
+    </div>
+
+    <h1>{{ article.title }}</h1>
+
+    <p>{{ article.created_in_words }}
+        {% if user.get_id() %}
+
+        | <a href="{{ url_for('article_update', id=article.id, slug=article.slug) }}">Edit</a>
+        {% endif %}
+    </p>
+
+    <div>{{ article.html | safe}}</div>
+
+</div>
+
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
+
+<div id="links">
+    {% for photo in photos %}
+    <a href="{{photo.file_url}}" data-gallery>
+        <img class="standard" src="{{photo.file_url}}">
+    </a>
+
+    {% endfor %}
+
+</div>
+
+
+<script src="{{ url_for('static', filename='Gallery-master/js/blueimp-gallery.min.js') }}"></script>
+
+<script>
+document.getElementById('links').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+
+
+</script>
+
+
+{% endblock %}
