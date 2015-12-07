@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h2>Create Article</h2>
+    <h2>Edit Article</h2>
 
 
 
@@ -25,5 +25,29 @@
 
     </form>
 
+    <a href="{{ url_for('upload_photo', id=article.id) }}">Upload Photos</a>
 
+
+    <div class="row">
+        {% for photo in photos %}
+        <div class="col-md-4">
+
+            <a href="{{url_for('edit_photo',id =photo.id) }}" data-gallery>
+                <img class="thumb" src="{{photo.file_url}}">
+            </a>
+            <p>{{photo.caption}}</p>
+        </div>
+    {% endfor %}
+
+    </div>
+
+
+    <div class="row">
+    <div class="pull-right">
+        <a href="{{ url_for('article_delete', id=article.id, slug=article.slug) }}">Delete Post</a>
+    </div>
+    </div>
+
+
+</hr>
 {% endblock %}

@@ -18,7 +18,7 @@
     <p>{{ article.created_in_words }}
         {% if user.get_id() %}
 
-        | <a href="{{ url_for('article_update', id=article.id, slug=article.slug) }}">Edit</a>
+        | <a href="{{ url_for('article_edit', id=article.id, slug=article.slug) }}">Edit</a>
         {% endif %}
     </p>
 

@@ -51,14 +51,13 @@ def article_create():
         db.session.add(article)
         db.session.commit()
 
-        return redirect(url_for('index'))
+        return redirect(url_for('show_article', id =article.id,slug =article.slug))
     return render_template('create_article.html', form=form, article=article)
-
 
 
 @app.route('/article/<int:id>/<slug>/edit', methods=['GET', 'POST'])
 @login_required
-def article_update(id, slug):
+def article_edit(id, slug):
     article = Article.find_by_id(id)
     photos=Photo.find_by_article_id(id)
 
@@ -70,8 +69,8 @@ def article_update(id, slug):
         form.populate_obj(article)
         db.session.add(article)
         db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('create_article.html', form=form, article=article, photos=photos)
+        return redirect(url_for('show_article', id =article.id,slug =article.slug))
+    return render_template('edit_article.html', form=form, article=article, photos=photos)
 
 
 @app.route('/article/<int:id>/<slug>/delete', methods=['GET', 'POST'])
@@ -88,36 +87,48 @@ def article_delete(id, slug):
     return redirect(url_for('index'))
 
 
-@app.route('/upload/<int:id>', methods=['GET', 'POST'])
+@app.route('/upload_photo/<int:id>', methods=['GET', 'POST'])
 @login_required
 def upload_photo(id):
 
-    photo=Photo()
+
     form = PhotoForm()
     # Set hidden field to post_id
-    form.post_id.data = id
+
 
     if form.validate_on_submit():
 
-        file = request.files['file']
-        file.filename = str(id) +"_" + secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'],file.filename))
+        files = request.files.getlist('file')
+        n=0;
+        print files
+        for file in files:
+            file.filename = str(id) +"_" + secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],file.filename))
 
-        form.populate_obj(photo)
-        photo.filename =file.filename
-        db.session.add(photo)
-        db.session.commit()
+            # Might need to resive photos. What about rotate.
+
+            photo=Photo()
+            photo.filename =file.filename
+            photo.post_id =id
+            photo.display_order = n
+            db.session.add(photo)
+
+            db.session.commit()
+
+            n=n+1
+
+
 
         article = Article.find_by_id(id)
 
         return redirect(url_for('show_article',id=id, slug =article.slug))
 
 
-    return render_template('photo.html', form=form)
+    return render_template('upload_photo.html', form=form)
 
-@app.route('/photo/<int:id>', methods=['GET', 'POST'])
+@app.route('/edit_photo/<int:id>', methods=['GET', 'POST'])
 @login_required
-def update_photo(id):
+def edit_photo(id):
 
     photo=Photo.find_by_id(id)
 
@@ -130,9 +141,9 @@ def update_photo(id):
         db.session.add(photo)
         db.session.commit()
         article = Article.find_by_id(photo.post_id)
-        return redirect(url_for('article_update', id=article.id, slug= article.slug))
+        return redirect(url_for('article_edit', id=article.id, slug= article.slug))
 
-    return render_template('update_photo.html', form=form )
+    return render_template('edit_photo.html', form=form )
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -145,6 +156,7 @@ def login():
 
         if user is not None and user.check_password(form.password.data):
             login_user(user)
+            print user
             return redirect(url_for('index'))
         else:
             if user is None:

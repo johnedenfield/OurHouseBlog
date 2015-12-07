@@ -53,6 +53,7 @@ class Photo(db.Model):
     caption = db.Column(db.Text)
     created = db.Column(db.DateTime, default=datetime.datetime.now)
     display_order = db.Column(db.Integer)
+    rotate = db.Column(db.Integer)
 
     @classmethod
     def find_by_article_id(cls, id):
