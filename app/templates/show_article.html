@@ -40,8 +40,10 @@
 
 <div id="links">
     {% for photo in photos %}
+
+    {% set rotclass = 'rot' + photo.rotate|string %}
     <a href="{{photo.file_url}}" data-gallery>
-        <img class="standard" src="{{photo.file_url}}">
+        <img class="standard {{rotclass}}" src="{{photo.file_url}}">
     </a>
 
     {% endfor %}

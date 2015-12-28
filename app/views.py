@@ -3,7 +3,6 @@ __author__ = 'johnedenfield'
 from models import Article, Photo, User
 from flask import render_template, request, session, url_for, redirect, flash
 from forms import ArticleCreateForm, ArticleUpdateForm, PhotoForm,PhotoUpdateForm,LoginForm
-from werkzeug.utils import secure_filename
 from app import app, db, login_manager
 from flask_login import login_required, login_user, logout_user, current_user
 
@@ -81,6 +80,19 @@ def article_delete(id, slug):
     if not article:
         return HTTPNotFound(404)
 
+    photos = Photo.find_by_article_id(id)
+    for photo in photos:
+        try:
+            filename = os.path.join(app.config['PHOTO_FOLDER'], photo.filename)
+            os.remove(filename)
+        except:
+            print 'Could not find file'
+        try:
+            db.session.delete(photo)
+            db.session.commit()
+        except:
+            print 'photo could not be deleted'
+
     db.session.delete(article)
     db.session.commit()
 
@@ -91,38 +103,19 @@ def article_delete(id, slug):
 @login_required
 def upload_photo(id):
 
-
     form = PhotoForm()
     # Set hidden field to post_id
-
-
     if form.validate_on_submit():
 
         files = request.files.getlist('file')
-        n=0;
-        print files
+
         for file in files:
-            file.filename = str(id) +"_" + secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'],file.filename))
-
-            # Might need to resive photos. What about rotate.
-
             photo=Photo()
-            photo.filename =file.filename
-            photo.post_id =id
-            photo.display_order = n
-            db.session.add(photo)
-
-            db.session.commit()
-
-            n=n+1
-
-
+            photo.upload(file,id)
 
         article = Article.find_by_id(id)
 
         return redirect(url_for('show_article',id=id, slug =article.slug))
-
 
     return render_template('upload_photo.html', form=form)
 
@@ -143,8 +136,16 @@ def edit_photo(id):
         article = Article.find_by_id(photo.post_id)
         return redirect(url_for('article_edit', id=article.id, slug= article.slug))
 
-    return render_template('edit_photo.html', form=form )
+    return render_template('edit_photo.html', form = form, photo = photo )
 
+@app.route('/delete_photo/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_photo(id):
+    photo=Photo.find_by_id(id)
+    photo.delete()
+    article = Article.find_by_id(photo.post_id)
+
+    return redirect(url_for('article_edit', id=article.id, slug= article.slug))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

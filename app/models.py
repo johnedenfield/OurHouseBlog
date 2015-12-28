@@ -7,6 +7,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from webhelpers.date import time_ago_in_words
 from webhelpers.text import urlify
+from werkzeug.utils import secure_filename
+from PIL import Image
 
 import datetime, markdown, os
 
@@ -52,8 +54,35 @@ class Photo(db.Model):
     filename = db.Column(db.String(100))
     caption = db.Column(db.Text)
     created = db.Column(db.DateTime, default=datetime.datetime.now)
+    height =db.Column(db.Interger)
+    width =db.Column(db.Integer)
     display_order = db.Column(db.Integer)
     rotate = db.Column(db.Integer)
+
+
+    def upload(self, file_obj, id):
+        self.filename =file_obj.filename
+
+        self.post_id =id
+        self.rotate = 0
+        self.display_order = 0
+
+        self.filename = str(id) +"_" + secure_filename(file_obj.filename)
+        file_path =os.path.join(app.config['PHOTO_FOLDER'],self.filename)
+        file_obj.save(file_path)
+
+        im = Image.open(file_path)
+        self.width, self.height = im.size
+
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        filename = os.path.join(app.config['PHOTO_FOLDER'], self.filename)
+        os.remove(filename)
+        db.session.delete(self)
+        db.session.commit()
+
 
     @classmethod
     def find_by_article_id(cls, id):
@@ -62,6 +91,7 @@ class Photo(db.Model):
     @classmethod
     def find_by_id(cls, id):
         return Photo.query.filter(Photo.id == id).first()
+
 
     @property
     def created_in_words(self):

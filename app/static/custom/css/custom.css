@@ -47,11 +47,34 @@ input[type="password"] {
     margin-bottom: 20px;
 }
 
- img.standard{
+img.standard{
     width: 33%;
     padding:25px 25px 25px 25px;
- }
+}
 
+img.rot90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+img.rot180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+img.rot270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
 
 
 .thumb{
@@ -66,26 +89,13 @@ input[type="password"] {
 
 
 header {
-    background-image: url("/static/custom/home.jpg");
-    background-size:100%;
-    background-color: #cccccc;
-     padding: 250px
+    height:450px;
+    background-image: url("../Home.jpg");
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+
+
 }
 
-.arrow-right {
-	width: 0;
-	height: 0;
-	border-top: 60px solid transparent;
-	border-bottom: 60px solid transparent;
-
-	border-left: 60px solid green;
-}
-
-.arrow-left {
-	width: 0;
-	height: 0;
-	border-top: 10px solid transparent;
-	border-bottom: 10px solid transparent;
-
-	border-right:10px solid blue;
-}
