@@ -5,6 +5,13 @@
     padding:2.5% 0% 0% 2.5%;
 }
 
+.page-header {
+    text-align: center;
+}
+
+.modal-footer {
+    text-align: center;
+}
 
 header {
     height:450px;
@@ -16,50 +23,30 @@ header {
 
 }
 
-
-img.rot90 {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
+img.fullwidth {
+    width: 100% !important;
+    height: auto !important;
 }
-
-img.rot180 {
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    transform: rotate(180deg);
-}
-
-img.rot270 {
-    -webkit-transform: rotate(270deg);
-    -moz-transform: rotate(270deg);
-    -o-transform: rotate(270deg);
-    -ms-transform: rotate(270deg);
-    transform: rotate(270deg);
-}
-
 
 
 /* Image Grid Layout */
 #photos {
   /* Prevent vertical gaps */
-  line-height: 5px;
+  line-height: 1;
 
   -webkit-column-count: 4;
-  -webkit-column-gap:   5px;
+  -webkit-column-gap:   0px;
   -moz-column-count:    4;
   -moz-column-gap:      0px;
   column-count:         4;
-  column-gap:           5px;
+  column-gap:           0px;
 }
 
 #photos img {
   /* Just in case there are inline attributes */
   width: 100% !important;
   height: auto !important;
+  padding:5px;
 }
 
 
@@ -67,6 +54,7 @@ img.rot270 {
 #photos div{
    position: relative;
    width: 100%; /* for IE 6 */
+
 }
 
 #photos div p {
@@ -76,11 +64,40 @@ img.rot270 {
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
    top: 0;
-   width: 100%;
+   width: 96.5%;
    padding: 2.5%;
+   margin: 5px;
+
 }
 
+img.rot90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    width: auto !important;
+    height: 100% !important;
+    padding:5px;
+}
 
+img.rot180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    padding:5px;
+}
+
+img.rot270 {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+    padding:5px;
+}
 
 
 

@@ -80,10 +80,16 @@ class Photo(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def rotate_photo(self):
+        file_path =os.path.join(app.config['PHOTO_FOLDER'],self.filename)
+        im = Image.open(file_path)
+        im.rotate(self.rotate)
+        im.save(file_path)
+        self.rotate = 0
 
     @classmethod
     def find_by_article_id(cls, id):
-        return Photo.query.filter(Photo.post_id == id).order_by(asc(Photo.created)).all()
+        return Photo.query.filter(Photo.post_id == id).order_by(asc(Photo.display_order)).all()
 
     @classmethod
     def find_by_id(cls, id):

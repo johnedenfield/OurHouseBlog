@@ -123,6 +123,9 @@ def photo_edit(id):
 
     if form.validate_on_submit():
         form.populate_obj(photo)
+        if photo.rotate > 0:
+            photo.rotate_photo()
+
         db.session.add(photo)
         db.session.commit()
         return redirect(url_for('article_edit',id=photo.post_id))
