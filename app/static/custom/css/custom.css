@@ -1,56 +1,21 @@
-.audio {
-    width: 100%;
+
+
+.article{
+
+    padding:2.5% 0% 0% 2.5%;
 }
 
-.modal-footer {
-    text-align: center;
+
+header {
+    height:450px;
+    background-image: url("../Home.jpg");
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+
 }
 
-.form {
-    margin-left: 350px;
-    margin-right: 350px;
-}
-
-.page-header {
-    text-align: center;
-}
-
-input[type="text"] {
-    width: 98%;
-}
-
-textarea.article {
-    width: 98%;
-    height: 300px;
-}
-
-textarea.photo {
-    width: 98%;
-    height: 300px;
-}
-
-input[type="password"] {
-    width: 100%;
-}
-
-.dash {
-    margin-left: 120px;
-    margin-bottom: 20px;
-}
-
-.btn-dash {
-    margin-top: 20px;
-    margin-left: 270px;
-}
-
-.btn-delete {
-    margin-bottom: 20px;
-}
-
-img.standard{
-    width: 33%;
-    padding:25px 25px 25px 25px;
-}
 
 img.rot90 {
     -webkit-transform: rotate(90deg);
@@ -77,25 +42,74 @@ img.rot270 {
 }
 
 
-.thumb{
-    width: 80%;
 
- }
+/* Image Grid Layout */
+#photos {
+  /* Prevent vertical gaps */
+  line-height: 5px;
 
-.article{
+  -webkit-column-count: 4;
+  -webkit-column-gap:   5px;
+  -moz-column-count:    4;
+  -moz-column-gap:      0px;
+  column-count:         4;
+  column-gap:           5px;
+}
 
-    padding:25px 0px 5px 25px;
+#photos img {
+  /* Just in case there are inline attributes */
+  width: 100% !important;
+  height: auto !important;
 }
 
 
-header {
-    height:450px;
-    background-image: url("../Home.jpg");
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
 
-
+#photos div{
+   position: relative;
+   width: 100%; /* for IE 6 */
 }
 
+#photos div p {
+   position: absolute;
+   font-size: 12px;
+   color: white;
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   top: 0;
+   width: 100%;
+   padding: 2.5%;
+}
+
+
+
+
+
+
+@media (max-width: 1200px) {
+  #photos {
+  -moz-column-count:    4;
+  -webkit-column-count: 4;
+  column-count:         4;
+  }
+}
+@media (max-width: 1000px) {
+  #photos {
+  -moz-column-count:    3;
+  -webkit-column-count: 3;
+  column-count:         3;
+  }
+}
+@media (max-width: 800px) {
+  #photos {
+  -moz-column-count:    2;
+  -webkit-column-count: 2;
+  column-count:         2;
+  }
+}
+@media (max-width: 400px) {
+  #photos {
+  -moz-column-count:    1;
+  -webkit-column-count: 1;
+  column-count:         1;
+  }
+}

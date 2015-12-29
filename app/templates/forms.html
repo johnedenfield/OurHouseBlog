@@ -1,0 +1,45 @@
+{% macro edit_photo(photo) -%}
+
+{% set rotclass = 'rot' + photo.rotate|string %}
+<div class="row">
+    <div class =col-md-6 >
+        <img class="fullheight {{rotclass}}" src="{{photo.file_url}}">
+    </div>
+
+    <div class =col-md-6 >
+        <form action="{{url_for('photo_edit',id=photo.id) }}" method="POST" enctype="multipart/form-data">
+        {{ photo.form.hidden_tag() }}
+
+
+        <div class="form-group">
+            {{ photo.form.caption.label() }}
+            {{ photo.form.caption(class_="form-control",rows="2") }}
+        </div>
+
+        <div class="form-group">
+            {{ photo.form.display_order.label() }}
+            {{ photo.form.display_order(class_="form-control")}}
+        </div>
+
+        <div class="form-group">
+            {{ photo.form.rotate.label() }}
+            {{ photo.form.rotate(class_="form-control")}}
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">Update Picture</button>
+        </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+{%- endmacro %}
+
+{% macro edit_article(form,id) -%}
+
+{%- endmacro %}

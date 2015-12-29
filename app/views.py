@@ -1,12 +1,11 @@
 __author__ = 'johnedenfield'
 
 from models import Article, Photo, User
-from flask import render_template, request, session, url_for, redirect, flash
-from forms import ArticleCreateForm, ArticleUpdateForm, PhotoForm,PhotoUpdateForm,LoginForm
+from flask import render_template, request, url_for, redirect, flash
+from forms import ArticleCreateForm,ArticleEditForm, PhotoForm,PhotoEditForm, LoginForm
 from app import app, db, login_manager
 from flask_login import login_required, login_user, logout_user, current_user
 
-import os
 
 
 @login_manager.user_loader
@@ -25,17 +24,18 @@ def index():
     articles = Article.all()
     return render_template('index.html', articles=articles, user=current_user)
 
-@app.route('/article/<int:id>/<slug>')
-def show_article(id, slug):
+@app.route('/article/<int:id>')
+def article_show(id):
     article = Article.find_by_id(id)
     photos = Photo.find_by_article_id(id)
 
-    return render_template('show_article.html', article=article, photos=photos, user =current_user)
+    return render_template('article.html', article=article, photos=photos, user =current_user)
+
 @app.route('/goto/<int:id>')
-def goto_article(id):
+def article_goto(id):
     article = Article.find_by_id(id)
     if article:
-        return redirect(url_for('show_article',id=article.id,slug=article.slug))
+        return redirect(url_for('article_show',id=article.id))
     return redirect(url_for('index'))
 
 @app.route('/article_create', methods=['GET', 'POST'])
@@ -50,31 +50,33 @@ def article_create():
         db.session.add(article)
         db.session.commit()
 
-        return redirect(url_for('show_article', id =article.id,slug =article.slug))
-    return render_template('create_article.html', form=form, article=article)
+        return redirect(url_for('article_show', id =article.id))
+    return render_template('article_create.html', form=form, article=article)
 
 
-@app.route('/article/<int:id>/<slug>/edit', methods=['GET', 'POST'])
+@app.route('/article/<int:id>/edit', methods=['GET', 'POST'])
 @login_required
-def article_edit(id, slug):
+def article_edit(id):
     article = Article.find_by_id(id)
     photos=Photo.find_by_article_id(id)
 
     if not article:
         return HTTPNotFound(404)
-    form = ArticleUpdateForm(request.form, article)
+    form=ArticleEditForm(request.form,article)
 
     if form.validate_on_submit():
+
         form.populate_obj(article)
+
         db.session.add(article)
         db.session.commit()
-        return redirect(url_for('show_article', id =article.id,slug =article.slug))
-    return render_template('edit_article.html', form=form, article=article, photos=photos)
+        return redirect(url_for('article_show', id =article.id))
+    return render_template('article_edit.html',  article=article, photos=photos, form=form)
 
 
-@app.route('/article/<int:id>/<slug>/delete', methods=['GET', 'POST'])
+@app.route('/article/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
-def article_delete(id, slug):
+def article_delete(id):
 
     article = Article.find_by_id(id)
     if not article:
@@ -82,16 +84,7 @@ def article_delete(id, slug):
 
     photos = Photo.find_by_article_id(id)
     for photo in photos:
-        try:
-            filename = os.path.join(app.config['PHOTO_FOLDER'], photo.filename)
-            os.remove(filename)
-        except:
-            print 'Could not find file'
-        try:
-            db.session.delete(photo)
-            db.session.commit()
-        except:
-            print 'photo could not be deleted'
+        photo.delete()
 
     db.session.delete(article)
     db.session.commit()
@@ -99,53 +92,52 @@ def article_delete(id, slug):
     return redirect(url_for('index'))
 
 
-@app.route('/upload_photo/<int:id>', methods=['GET', 'POST'])
+@app.route('/article/<int:post_id>/photo_create', methods=['GET', 'POST'])
 @login_required
-def upload_photo(id):
+def photo_create(post_id):
 
     form = PhotoForm()
-    # Set hidden field to post_id
-    if form.validate_on_submit():
+    form.post_id.data=post_id
 
+    if form.validate_on_submit():
         files = request.files.getlist('file')
 
         for file in files:
             photo=Photo()
-            photo.upload(file,id)
+            photo.upload(file,post_id)
 
-        article = Article.find_by_id(id)
+        return redirect(url_for('article_show',id=post_id))
 
-        return redirect(url_for('show_article',id=id, slug =article.slug))
+    return render_template('photo_create.html', form=form)
 
-    return render_template('upload_photo.html', form=form)
-
-@app.route('/edit_photo/<int:id>', methods=['GET', 'POST'])
+@app.route('/photo/<int:id>/edit', methods=['GET', 'POST'])
 @login_required
-def edit_photo(id):
+def photo_edit(id):
 
     photo=Photo.find_by_id(id)
 
     if not photo:
         return HTTPNotFound(404)
-    form = PhotoUpdateForm(request.form, photo)
+
+    form = PhotoEditForm(request.form,photo)
 
     if form.validate_on_submit():
         form.populate_obj(photo)
         db.session.add(photo)
         db.session.commit()
-        article = Article.find_by_id(photo.post_id)
-        return redirect(url_for('article_edit', id=article.id, slug= article.slug))
+        return redirect(url_for('article_edit',id=photo.post_id))
 
-    return render_template('edit_photo.html', form = form, photo = photo )
+    return render_template('photo_edit.html', form=form, photo=photo)
 
-@app.route('/delete_photo/<int:id>', methods=['GET', 'POST'])
+
+
+@app.route('/photo/<int:id>/delete', methods=['GET', 'POST'])
 @login_required
-def delete_photo(id):
+def photo_delete(id):
     photo=Photo.find_by_id(id)
     photo.delete()
-    article = Article.find_by_id(photo.post_id)
 
-    return redirect(url_for('article_edit', id=article.id, slug= article.slug))
+    return redirect(url_for('article_edit', id=photo.post_id))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

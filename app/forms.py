@@ -9,7 +9,7 @@ class ArticleCreateForm(Form):
     body = TextAreaField('Body')
     posted = BooleanField('Post')
 
-class ArticleUpdateForm(ArticleCreateForm):
+class ArticleEditForm(ArticleCreateForm):
     id = HiddenField()
 
 class PhotoForm(Form):
@@ -17,9 +17,9 @@ class PhotoForm(Form):
     file = FileField('Photo')
 
 
-class PhotoUpdateForm(PhotoForm):
+class PhotoEditForm(PhotoForm):
     id = HiddenField()
-    caption = TextAreaField('caption')
+    caption = TextAreaField('Caption')
     display_order = IntegerField('Display Order')
     rotate = SelectField(u'Rotate', choices=[('0 Deg', 0 ),('90 Deg', 90 ), ('180 Deg', 180 ), ('270 Deg', 270)])
 

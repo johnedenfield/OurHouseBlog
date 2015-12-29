@@ -1,7 +1,7 @@
 __author__ = 'johnedenfield'
 
 from sqlalchemy import desc, asc
-from app import db
+from app import app,db
 from flask import url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -11,8 +11,6 @@ from werkzeug.utils import secure_filename
 from PIL import Image
 
 import datetime, markdown, os
-
-
 
 
 class Article(db.Model):
@@ -54,15 +52,14 @@ class Photo(db.Model):
     filename = db.Column(db.String(100))
     caption = db.Column(db.Text)
     created = db.Column(db.DateTime, default=datetime.datetime.now)
-    height =db.Column(db.Interger)
+    height =db.Column(db.Integer)
     width =db.Column(db.Integer)
     display_order = db.Column(db.Integer)
     rotate = db.Column(db.Integer)
 
 
     def upload(self, file_obj, id):
-        self.filename =file_obj.filename
-
+        self.filename = file_obj.filename
         self.post_id =id
         self.rotate = 0
         self.display_order = 0
@@ -100,6 +97,7 @@ class Photo(db.Model):
     @property
     def file_url(self):
         return url_for('static',filename =os.path.join('photos', self.filename))
+
 
 
 
