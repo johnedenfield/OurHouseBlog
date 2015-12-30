@@ -5,11 +5,11 @@
 <div class="article">
 
     <div class="btn-group" role="group" aria-label="...">
-        <a href="{{ url_for('article_goto', id=article.id, direction='back' )}}"
+        <a href="{{ url_for('article_goto', id=article.post_order, direction='back' )}}"
            type="button" class="btn btn-default">Prev</a>
         <a href="{{ url_for('index') }}"
            type="button" class="btn btn-default">Home</a>
-        <a href="{{ url_for('article_goto', id=article.id, direction ='forward' ) }}"
+        <a href="{{ url_for('article_goto', id=article.post_order, direction ='forward' ) }}"
            type="button" class="btn btn-default">Next</a>
     </div>
 

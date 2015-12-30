@@ -52,7 +52,9 @@ def article_goto(id, direction):
         article = Article.query.filter(Article.post_order > id).order_by(asc(Article.post_order)).first()
 
     else:
+
         article = Article.query.filter(Article.post_order < id).order_by(desc(Article.post_order)).first()
+
 
     if article:
         return redirect(url_for('article_show', id=article.id))
