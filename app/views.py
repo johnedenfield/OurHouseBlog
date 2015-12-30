@@ -5,7 +5,7 @@ from flask import render_template, request, url_for, redirect, flash
 from forms import ArticleCreateForm,ArticleEditForm, PhotoForm,PhotoEditForm, LoginForm
 from app import app, db, login_manager
 from flask_login import login_required, login_user, logout_user, current_user
-
+from nocache import nocache
 
 
 @login_manager.user_loader
@@ -31,8 +31,14 @@ def article_show(id):
 
     return render_template('article.html', article=article, photos=photos, user =current_user)
 
-@app.route('/goto/<int:id>')
-def article_goto(id):
+@app.route('/goto/<int:id>/<direction>')
+def article_goto(id,direction):
+
+    if direction == 'forward':
+        id=id+1
+    else:
+        id=id-1
+
     article = Article.find_by_id(id)
     if article:
         return redirect(url_for('article_show',id=article.id))
@@ -129,6 +135,7 @@ def photo_edit(id):
 
         db.session.add(photo)
         db.session.commit()
+        return redirect(url_for('article_edit',id=photo.post_id))
 
     return render_template('photo_edit.html', form=form, photo=photo)
 

@@ -71,6 +71,10 @@ class Photo(db.Model):
         im = Image.open(file_path)
         self.width, self.height = im.size
 
+        if self.width < self.height:
+            im_rot = im.rotate(270)
+            im_rot.save(file_path)
+
         db.session.add(self)
         db.session.commit()
 
