@@ -123,13 +123,12 @@ def photo_edit(id):
 
     if form.validate_on_submit():
         form.populate_obj(photo)
-        angle =float(form.rotate.data)
+        angle =360-float(form.rotate.data)
         if angle > 0:
             photo.rotate_photo(angle)
 
         db.session.add(photo)
         db.session.commit()
-        return redirect(url_for('article_edit',id=photo.post_id))
 
     return render_template('photo_edit.html', form=form, photo=photo)
 

@@ -39,10 +39,10 @@
    <section id ="photos">
         {% for photo in photos %}
 
-            {% set rotclass = 'rot' + photo.rotate|string %}
+
             <div>
             <a href="{{photo.file_url}}">
-                <img class="{{rotclass}}" src="{{photo.file_url}}">
+                <img src="{{photo.file_url}}">
             </a>
                {% if photo.caption %}
                     <p>{{photo.caption}}</p>

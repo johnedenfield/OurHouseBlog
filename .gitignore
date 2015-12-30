@@ -11,7 +11,7 @@ __pycache__/
 *.db
 
 # Photos
-/static/photos/*
+app/static/photos/
 
 # Distribution / packaging
 .Python
