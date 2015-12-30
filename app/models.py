@@ -1,7 +1,7 @@
 __author__ = 'johnedenfield'
 
 from sqlalchemy import desc, asc
-from app import app,db
+from app import app, db
 from flask import url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -20,10 +20,11 @@ class Article(db.Model):
     body = db.Column(db.Text)
     created = db.Column(db.DateTime, default=datetime.datetime.now)
     posted = db.Column(db.Boolean)
+    post_order = db.Column(db.Integer)
 
     @classmethod
     def all(cls):
-        return Article.query.order_by(desc(Article.created)).all()
+        return Article.query.order_by(desc(Article.post_order)).all()
 
     @classmethod
     def find_by_id(cls, id):
@@ -42,9 +43,8 @@ class Article(db.Model):
         return markdown.markdown(self.body)
 
 
-
 class Photo(db.Model):
-    __tablename__='photos'
+    __tablename__ = 'photos'
 
     id = db.Column(db.Integer, primary_key=True)
     post_id = db.Column(db.Integer, db.ForeignKey(Article.id, onupdate="CASCADE", ondelete="CASCADE"))
@@ -52,20 +52,19 @@ class Photo(db.Model):
     filename = db.Column(db.String(100))
     caption = db.Column(db.Text)
     created = db.Column(db.DateTime, default=datetime.datetime.now)
-    height =db.Column(db.Integer)
-    width =db.Column(db.Integer)
+    height = db.Column(db.Integer)
+    width = db.Column(db.Integer)
     display_order = db.Column(db.Integer)
     rotate = db.Column(db.Integer)
 
-
     def upload(self, file_obj, id):
         self.filename = file_obj.filename
-        self.post_id =id
+        self.post_id = id
         self.rotate = 0
         self.display_order = 0
 
-        self.filename = str(id) +"_" + secure_filename(file_obj.filename)
-        file_path =os.path.join(app.config['PHOTO_FOLDER'],self.filename)
+        self.filename = str(id) + "_" + secure_filename(file_obj.filename)
+        file_path = os.path.join(app.config['PHOTO_FOLDER'], self.filename)
         file_obj.save(file_path)
 
         im = Image.open(file_path)
@@ -84,11 +83,12 @@ class Photo(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def rotate_photo(self,val):
-        file_path =os.path.join(app.config['PHOTO_FOLDER'],self.filename)
+    def rotate_photo(self, val):
+        file_path = os.path.join(app.config['PHOTO_FOLDER'], self.filename)
         im = Image.open(file_path)
         im_rot = im.rotate(val)
         im_rot.save(file_path)
+        print im_rot
         self.rotate = 0
 
     @classmethod
@@ -99,16 +99,13 @@ class Photo(db.Model):
     def find_by_id(cls, id):
         return Photo.query.filter(Photo.id == id).first()
 
-
     @property
     def created_in_words(self):
         return time_ago_in_words(self.created)
 
     @property
     def file_url(self):
-        return url_for('static',filename =os.path.join('photos', self.filename))
-
-
+        return url_for('static', filename=os.path.join('photos', self.filename))
 
 
 # User Model
@@ -119,7 +116,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String)
     pwdhash = db.Column(db.String)
 
-    def __init__(self,username, password):
+    def __init__(self, username, password):
         self.username = username
         self.set_password(password)
 

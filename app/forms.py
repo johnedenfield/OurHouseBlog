@@ -8,6 +8,7 @@ class ArticleCreateForm(Form):
     title = StringField('Title')
     body = TextAreaField('Body')
     posted = BooleanField('Post')
+    post_order = IntegerField('Post Order')
 
 class ArticleEditForm(ArticleCreateForm):
     id = HiddenField()

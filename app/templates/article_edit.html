@@ -9,6 +9,11 @@
     {{ form.hidden_tag() }}
 
     <div class="form-group">
+        {{ form.post_order.label }}
+        {{ form.post_order(class_="form-control", type="number",style ="width:100px") }}
+    </div>
+
+    <div class="form-group">
         {{ form.title.label }}
         {{ form.title(class_="form-control") }}
     </div>
