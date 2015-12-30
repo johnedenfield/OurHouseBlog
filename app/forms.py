@@ -21,7 +21,7 @@ class PhotoEditForm(PhotoForm):
     id = HiddenField()
     caption = TextAreaField('Caption')
     display_order = IntegerField('Display Order')
-    rotate = SelectField(u'Rotate', choices=[('0 Deg', 0 ),('90 Deg', 90 ), ('180 Deg', 180 ), ('270 Deg', 270)])
+    rotate = SelectField(u'Rotate', choices=[('0', '0 deg' ),('90', '90 deg' ), ('180', '180 deg' ), ('270', '270 deg')])
 
 class LoginForm(Form):
     username = StringField('User Name', [validators.DataRequired("Please enter your username.")])

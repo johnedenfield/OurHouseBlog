@@ -80,11 +80,11 @@ class Photo(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def rotate_photo(self):
+    def rotate_photo(self,val):
         file_path =os.path.join(app.config['PHOTO_FOLDER'],self.filename)
         im = Image.open(file_path)
-        im.rotate(self.rotate)
-        im.save(file_path)
+        im_rot = im.rotate(val)
+        im_rot.save(file_path)
         self.rotate = 0
 
     @classmethod
