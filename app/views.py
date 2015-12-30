@@ -64,6 +64,7 @@ def article_goto(id, direction):
 def article_create():
     article = Article()
     form = ArticleCreateForm()
+    form.post_order.data = db.session.query(db.func.max(Article.post_order)).scalar()+1
 
     if form.validate_on_submit():
         form.populate_obj(article)
