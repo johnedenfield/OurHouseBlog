@@ -9,9 +9,6 @@
 
     <!--  Local Style Sheets for markdown and image gallery -->
 
-    <!-- Unused Links
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-img/css/bootstrap-image-gallery.min.css') }}"/>
-    -->
     <link rel="stylesheet" href="{{ url_for('static', filename='Gallery-master/css/blueimp-gallery.min.css') }}"/>
 
     <!-- Custom Style Sheet -->
@@ -20,30 +17,26 @@
     <!-- Java scripts -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-
     <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
     <script src="{{ url_for('static', filename='bootstrap-markdown/js/bootstrap-markdown.js')}}"></script>
 
 
-     <!-- Unused Links
-
-    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-    <script src="{{ url_for('static', filename='bootstrap-img/js/bootstrap-image-gallery.min.js') }}"></script>
-    -->
-
-
 </head>
 
+
+{% include "navbar.html" %}
+
+
 <body>
+
+
 <div class="container">
 
-<div  class="page-header">
-    <h1>323 Josephine </h1>
-</div>
 
 
 {% block content %}
 {% endblock %}
+
 
 <div class="modal-footer">
     <h4>&copy; Laura Daniel & John Edenfield</h4>

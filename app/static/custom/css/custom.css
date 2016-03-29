@@ -1,13 +1,26 @@
 
 
 .article{
-
     padding:2.5% 0% 0% 2.5%;
 }
 
 .page-header {
     text-align: center;
 }
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+nav ul li{
+
+    display:inline-block;
+    list-style-type:none;
+    padding:0% 4% 0% 0%;
+}
+
 
 .modal-footer {
     text-align: center;

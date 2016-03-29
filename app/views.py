@@ -143,9 +143,8 @@ def photo_edit(id):
 
     if form.validate_on_submit():
         form.populate_obj(photo)
-        angle = 360 - float(form.rotate.data)
-        if angle > 0:
-            photo.rotate_photo(angle)
+        angle = float(form.rotate.data)
+        photo.rotate_photo(angle)
 
         db.session.add(photo)
         db.session.commit()

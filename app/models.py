@@ -67,12 +67,7 @@ class Photo(db.Model):
         file_path = os.path.join(app.config['PHOTO_FOLDER'], self.filename)
         file_obj.save(file_path)
 
-        im = Image.open(file_path)
-        self.width, self.height = im.size
-
-        if self.width < self.height:
-            im_rot = im.rotate(270)
-            im_rot.save(file_path)
+        self.websize()
 
         db.session.add(self)
         db.session.commit()
@@ -91,6 +86,19 @@ class Photo(db.Model):
         print im_rot
         self.rotate = 0
 
+    def websize(self):
+        file_path = os.path.join(app.config['PHOTO_FOLDER'], self.filename)
+        im = Image.open(file_path)
+        im_resized = im.resize((400, 400), Image.ANTIALIAS)
+        file_path=os.path.join(app.config['PHOTO_FOLDER'],self.thumb_filename )
+        im_resized.save(file_path)
+
+    @property
+    def thumb_filename(self):
+        name = self.filename.split('.')
+        return name[0]+'_thumb.'+name[1]
+
+
     @classmethod
     def find_by_article_id(cls, id):
         return Photo.query.filter(Photo.post_id == id).order_by(asc(Photo.display_order)).all()
@@ -107,6 +115,9 @@ class Photo(db.Model):
     def file_url(self):
         return url_for('static', filename=os.path.join('photos', self.filename))
 
+    @property
+    def thumb_file_url(self):
+        return url_for('static', filename=os.path.join('photos', self.thumb_filename))
 
 # User Model
 class User(db.Model, UserMixin):
