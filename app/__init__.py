@@ -22,6 +22,13 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = '/login'
 
-from app import models
 from app import views
+from app.house.views import house
+from app.wedding.views import wedding
+from app.login import views
+
+app.register_blueprint(house, url_prefix='/house')
+app.register_blueprint(wedding, url_prefix='/wedding')
+
+
 

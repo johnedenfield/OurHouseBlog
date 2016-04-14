@@ -1,7 +1,7 @@
 __author__ = 'johnedenfield'
 
 from app import app,db
-from app.models import User
+from app.login.models import User
 if __name__ == "__main__":
     db.create_all()
     if User.query.first() is None:

@@ -1,30 +1,64 @@
 {% extends 'layout.html' %}
+
+
 {% block content %}
 
-    <header>
+<section id="heading">
+    <div class="container center">
+        <h1>Laura and John </h1>
+
+    </div>
+    <hr>
+</section>
+
+<section id="wedding_photo">
+    <header class="wedding">
 
     </header>
 
-    <p> We bought a house! A very old house. 107 years old to be exact.
-        She has good bones and appears to have been well maintained.
-        We believe we have the vision, the dedication, and the skills to bring this
-        lovely old house to a beautiful new stage in her life and are very excited to take on this challenge.
-        Please join us on our adventure of making this old house our new home.
-    </p>
-    <p> - Laura, John & Montana</p>
+</section>
 
-    <h2>Our Progress</h2>
-    <hr/>
-    {%   for post in articles %}
-    <h3><a href="{{ url_for('article_show', id=post.id) }}">{{ post.title }}</a></h3>
-    <p>{{ post.html|truncate(200)| safe }}</p>
+<section id="wedding">
 
-    <hr/>
+        <div class="container ">
+            <div class="center heading">
+
+                <a href="{{url_for('wedding.index')}}">
+                    <h2> Wedding </h2>
+                </a>
+
+                <p> September 24, 2016</p>
+
+                <p> Atlanta GA</p>
+            </div>
+        </div>
 
 
-    {% endfor %}
-     {% if user.get_id() %}
-     <a href="{{ url_for('article_create')}}">Create</a>
+</section>
 
-    {% endif %}
+
+<section id="house_photo">
+    <header class="house">
+
+    </header>
+
+</section>
+
+
+<section id="house">
+
+        <div class="container">
+            <div class="center heading">
+
+            <a href="{{url_for('house.all_articles')}}">
+                <h2> 323 Josephine St NE </h2>
+            </a>
+
+            <p> We bought a house and we are fixing it up</p>
+        </div>
+    </div>
+
+</section>
+
+
 {% endblock %}

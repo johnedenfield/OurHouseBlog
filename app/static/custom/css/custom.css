@@ -1,40 +1,72 @@
 
 
 .article{
-    padding:2.5% 0% 0% 2.5%;
+    padding:0 0 2em 0;
 }
 
-.page-header {
-    text-align: center;
-}
+
 
 .center {
     margin: 0 auto;
     text-align: center;
 }
 
+div.heading {
+    padding:2em 0 2em 0;
 
-nav ul li{
-
-    display:inline-block;
-    list-style-type:none;
-    padding:0% 4% 0% 0%;
 }
 
+/* RSVP Form */
+#RSVPform div{
+    height: 2em;
+}
 
-.modal-footer {
+input[type=text] {
+    border: none;
+    border-bottom: 1px solid;
+
+}
+
+input[type=number] {
+    border: none;
+    border-bottom: 1px solid;
+    width: 200px;
     text-align: center;
 }
 
+
+
 header {
-    height:450px;
-    background-image: url("../Home.JPG");
+    height:20em;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+}
+
+header.house {
+
+    background-image: url("../Home.JPG");
+
 
 }
+
+header.wedding {
+
+    background-image: url("../johnandlaura.jpeg");
+
+}
+
+header.atlanta {
+
+    background-image: url("../Atlanta.jpg");
+
+}
+
+
+
+
+
 
 img.fullwidth {
     width: 100% !important;

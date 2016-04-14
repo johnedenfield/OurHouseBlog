@@ -1,0 +1,104 @@
+{% extends "house_layout.html" %}
+
+{% block head %}
+{{super()}}
+<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='Gallery-master/css/blueimp-gallery.min.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-markdown/css/bootstrap-markdown.min.css') }}"/>
+
+<script src="{{ url_for('static', filename='bootstrap-markdown/js/bootstrap-markdown.js')}}"></script>
+<script src="{{ url_for('static', filename='Gallery-master/js/blueimp-gallery.min.js') }}"></script>
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+    <section>
+        <h1>{{ article.title }}</h1>
+
+        <p>{{ article.created_in_words }}
+            {% if user.get_id() %}
+
+            | <a href="{{ url_for('house.article_edit', id=article.id) }}">Edit</a>
+            {% endif %}
+        </p>
+
+        {{ article.html | safe}}
+    </section>
+
+    <section>
+        <div class="row center">
+            <div class="col-md-3">
+                <p></p>
+            </div>
+            <div class="col-md-2">
+                <a href="{{ url_for('house.article_goto', id=article.post_order, direction='back' )}}">Previous</a>
+
+            </div>
+
+            <div class="col-md-2">
+                <a href="{{ url_for('house.all_articles') }}">Home</a>
+            </div>
+
+            <div class="col-md-2">
+                <a href="{{ url_for('house.article_goto', id=article.post_order, direction ='forward' ) }}">Next</a>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+
+    <div id="links">
+        <section id="photos">
+            {% for photo in photos %}
+
+
+            <div>
+                <a href="{{photo.file_url}}">
+                    <img src="{{photo.thumb_file_url}}">
+                </a>
+                {% if photo.caption %}
+                <p>{{photo.caption}}</p>
+                {% endif %}
+            </div>
+
+            {% endfor %}
+        </section>
+
+    </div>
+
+</div>
+
+<script>
+document.getElementById('links').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+
+
+
+
+
+</script>
+
+
+{% endblock %}

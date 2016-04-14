@@ -1,0 +1,16 @@
+<nav>
+    <h1 class="page-header">323 Josephine </h1>
+    {% if article %}
+    <div class="center">
+    <ul>
+        <li><a href="{{ url_for('house.article_goto', id=article.post_order, direction='back' )}}">Prev</a>
+        </li>
+        <li><a href="{{ url_for('house.all_articles') }}">Home</a>
+        </li>
+        <li><a href="{{ url_for('house.article_goto', id=article.post_order, direction ='forward' ) }}">Next</a>
+        </li>
+    </ul>
+    </div>
+
+    {% endif %}
+</nav>

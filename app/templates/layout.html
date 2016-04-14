@@ -1,48 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>323 Josephine </title>
+    {% block head %}
+    <title>Laura and John</title>
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-markdown/css/bootstrap-markdown.min.css') }}"/>
-
-    <!--  Local Style Sheets for markdown and image gallery -->
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='Gallery-master/css/blueimp-gallery.min.css') }}"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='custom/css/custom.css') }}"/>
 
     <!-- Java scripts -->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
-    <script src="{{ url_for('static', filename='bootstrap-markdown/js/bootstrap-markdown.js')}}"></script>
 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+
+    {% endblock %}
 
 </head>
 
 
-{% include "navbar.html" %}
-
-
 <body>
-
-
-<div class="container">
-
+{% block title %}
+{% endblock %}
 
 
 {% block content %}
 {% endblock %}
 
 
-<div class="modal-footer">
+
+<div class="center">
     <h4>&copy; Laura Daniel & John Edenfield</h4>
 </div>
 
-</div>
 
 </body>
 </html>
