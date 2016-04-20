@@ -185,13 +185,18 @@ p.large {
 }
 
 p.caption {
-    font-size:90%;
+    font-size:80%;
     text-align:right;
-    height: inherit;
-    padding: 0em 2em 0em 0em;
+    padding: 480px 20px 0px 0px;
     color:white;
 }
 
+@media (max-width: 400px) {
+p.caption {
+    padding: 450px 20px 0px 0px;
+
+}
+}
 /* Image Grid Layout */
 #photos {
   /* Prevent vertical gaps */

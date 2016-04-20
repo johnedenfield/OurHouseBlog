@@ -12,6 +12,12 @@ __pycache__/
 
 # Photos
 app/static/photos/
+*.zip
+*.jpg
+*.JPG
+*.jpeg
+*.JPEG
+
 
 # Distribution / packaging
 .Python
