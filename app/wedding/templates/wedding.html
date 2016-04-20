@@ -28,7 +28,10 @@ $('#declining').change(function(){
 });
 
 
+if( !($('#attending').checked) && !($('#declining').checked)){
 
+    $('#attending').prop('checked',true);
+}
 
 });
 
@@ -54,8 +57,8 @@ $('#declining').change(function(){
         <div class="center heading">
             <h2>Ceremony</h2>
 
-            <p> September 24, 2016 &nbsp&middot&nbsp 4:30pm</p>
-
+            <p> September 24, 2016 </p>
+            <p> Arrive 4:00pm &nbsp&middot&nbsp Vows 4:30pm</p></p>
 
             <p>Backyard Garden &nbsp&middot&nbsp 323 Josephine St &nbsp&middot&nbsp Atlanta, Georgia</p>
 
@@ -186,7 +189,15 @@ $('#declining').change(function(){
                 <div id="rsvp_form" {% if my_rsvp %} style="display:none;" {% endif %}>
                     <p>The favor of your reply is requested by August</p>
                     {% if form.errors %}
-                        <div class="alert alert-danger" role="alert">looks Like there was a problem with your RSVP</div>
+                        <div class="alert alert-danger" role="alert">looks Like there was a problem with your RSVP. Please check
+
+                            <ul>
+
+                            {% for e in form.errors %}
+                                <li>{{form.errors[e][0]}}</li>
+                            {% endfor %}
+                            </ul>
+                        </div>
                     {% endif %}
 
                     <form id="submit_rspv" method="post" action="{{url_for('wedding.create_rsvp')}}">
@@ -196,8 +207,24 @@ $('#declining').change(function(){
                         {% endif %}
                         <div>
                         <span>
-                        {{ form.honorific(style ="width:15%",placeholder="M")}}
-                        {{ form.name(style ="width:80%") }}
+
+                        {% if form.honorific.errors %}
+
+                            {{ form.honorific(style ="width:15%",placeholder="M",class_="alert-danger")}}
+
+                        {% else %}
+                            {{ form.honorific(style ="width:15%",placeholder="M")}}
+
+                        {% endif %}
+
+                        {% if form.name.errors %}
+                             {{ form.name(style ="width:80%", class_="alert-danger") }}
+
+                        {% else %}
+                            {{ form.name(style ="width:80%") }}
+
+                         {% endif %}
+
                         </span>
                         </div>
 
@@ -218,7 +245,8 @@ $('#declining').change(function(){
 
                         <div>
                             <label>
-                            Number Attending {{ form.number(type="number",style ="width:50px", value="1", min="0", max="2") }}
+                            Number Attending
+                            {{ form.number(type="number",style ="width:50px", value="1", min="0", max="2") }}
                             </label>
                         </div>
                         <div class="center">
