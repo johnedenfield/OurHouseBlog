@@ -35,7 +35,7 @@ def log_user_in():
         return render_template('login.html', form=form)
 
 
-@app.route("/logout")
+@app.route("/logout", methods=['GET'])
 def log_user_out():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('log_user_in'))

@@ -5,15 +5,15 @@
 
 <section id="heading">
     <div class="container center">
-        <h1>Laura and John </h1>
+        <h2>Laura & John </h2>
 
     </div>
     <hr>
 </section>
 
 <section id="wedding_photo">
-    <header class="wedding">
-
+    <header class="ski_pc">
+    <p></p>
     </header>
 
 </section>
@@ -22,14 +22,12 @@
 
         <div class="container ">
             <div class="center heading">
-
+                 <h2>
                 <a href="{{url_for('wedding.index')}}">
-                    <h2> Wedding </h2>
+                    Wedding
                 </a>
-
-                <p> September 24, 2016</p>
-
-                <p> Atlanta GA</p>
+                </h2>
+                <p class="large">September 24, 2016 &nbsp&middot&nbsp Atlanta, Georgia</p>
             </div>
         </div>
 
@@ -38,7 +36,7 @@
 
 
 <section id="house_photo">
-    <header class="house">
+    <header class="home_montana">
 
     </header>
 
@@ -49,16 +47,25 @@
 
         <div class="container">
             <div class="center heading">
-
+             <h2>
             <a href="{{url_for('house.all_articles')}}">
-                <h2> 323 Josephine St NE </h2>
+                323 Josephine St
             </a>
-
-            <p> We bought a house and we are fixing it up</p>
+            </h2>
+            <p class="large"> We bought a house</p>
         </div>
     </div>
 
 </section>
 
 
+ {% if user.get_id() %}
+<section>
+     <div class="center">
+            <a href="{{ url_for('log_user_out') }}">Logout</a>
+
+     </div>
+
+    {% endif %}
+</section>
 {% endblock %}

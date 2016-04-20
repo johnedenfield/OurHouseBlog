@@ -8,6 +8,13 @@
 
 $( document ).ready(function() {
 
+$('#editRSVP').click(function(event){
+    event.preventDefault;
+    $('#my_rsvp').fadeOut(function(){
+        $('#rsvp_form').fadeIn()});
+    return false;
+
+});
 
 $('#attending').change(function(){
     val = !this.checked;
@@ -21,7 +28,13 @@ $('#declining').change(function(){
 });
 
 
+
+
 });
+
+
+
+
 
 
 
@@ -33,38 +46,36 @@ $('#declining').change(function(){
 {% block content %}
 
 <section id="ceremony">
-    <header class="house"></header>
+    <header class="bridge">
+        <p class="caption"> The bridge where John proposed to Laura &nbsp&middot&nbsp Chicago, September 2015 </p>
+    </header>
+
     <div class="'container">
         <div class="center heading">
             <h2>Ceremony</h2>
 
-            <p> September 24, 2016 4:30 PM</p>
+            <p> September 24, 2016 &nbsp&middot&nbsp 4:30pm</p>
 
-            <p> In the back yard garden of </p>
 
-            <p> 323 Josephine St NE </p>
+            <p>Backyard Garden &nbsp&middot&nbsp 323 Josephine St &nbsp&middot&nbsp Atlanta, Georgia</p>
 
-            <p> Atlanta GA. 30307</p>
-
-            <p> Reception to follow</p>
+            <p> Reception to Follow</p>
         </div>
 
     </div>
 </section>
 
 <section id="reception">
-    <header class="house"></header>
+    <header class="ski_bs">
+        <p class="caption"> Big Ski Montana Ski Trip &nbsp&middot&nbsp February 2015 </p>
+    </header>
     <div class="'container">
         <div class="center heading">
             <h2>Reception</h2>
 
-            <p> September 24, 2016 5:30 PM</p>
+            <p><a href="http://www.wisteria-atlanta.com/"> Wisteria Restaurant </a> &nbsp&middot&nbsp 5:30pm</p>
 
-            <p><a href="http://www.wisteria-atlanta.com/"> Wisteria Restaurant </a></p>
-
-            <p> 471 North Highland Ave </p>
-
-            <p>Atlanta, GA. 30307</p>
+            <p> 471 North Highland Ave &nbsp &middot &nbsp Atlanta, Georgia</p>
 
         </div>
 
@@ -73,41 +84,51 @@ $('#declining').change(function(){
 
 
 <section id="lodging">
-    <header class="atlanta"></header>
+    <header class="atlanta">
+        <p class="caption"> The Atlanta Sky Line </p>
+    </header>
     <div class="'container">
 
         <div class="row heading">
-         <h2 class="center"> Where to Stay</h2>
-         </div>
+            <h2 class="center"> Where to Stay</h2>
+        </div>
         <div class="row">
 
-            <div class="col-md-4 center">
-                <h3> <a href="http://www.thegeorgianterrace.com">The Georgian Terrace</a></h3>
-                <p> 659 Peachtree Street NE </p>
-                <p>Atlanta, Georgia 30308</p>
+            <div class="col-md-4 center padded">
+                <h3><a href="http://www.thegeorgianterrace.com">The Georgian Terrace</a></h3>
+
+                <p> 659 Peachtree ST NE </p>
+                <p> Atlanta, Georgia 30308</p>
+
                 <p>1-800-651-2316 </p>
-                <p> An historic atlanta hotel located in the southern part of midtown.
-                    With its parisian inspired architecture
-                    A short drive or ubur to the wedding and reception</p>
+
+                <p class="small"> An historic atlanta hotel located in the southern part of midtown.
+                    With its parisian inspired architecture, this iconic hotel is the
+                    perfect location for the more traditional well to do traveler.
+                    A short drive or uber to the wedding and reception.</p>
 
             </div>
-            <div class="col-md-4 center">
-                <h3> <a href="http://www.ellishotel.com">The Ellis Hotel</a></h3>
-                <p> 176 Peachtree Street NW</p>
-                <p>Atlanta, GA 30303,USA </p>
+            <div class="col-md-4 center padded">
+                <h3><a href="http://www.ellishotel.com">The Ellis Hotel</a></h3>
+
+                <p> 176 Peachtree ST </p><p>  Atlanta, Georgia 30303</p>
+
                 <p>404-523-5155</p>
-                <p> A hip hotel located in downtown. The sounds of mowtown greet guest
-                    A short drive or ubur to the wedding and reception.</p>
+
+                <p class="small"> A hip hotel located in downtown. With modern style, small rooms, and
+                    the sounds of mowtown filling the lobby, this location is perfect for the trendy traveler.
+                    A short drive or uber to the wedding and reception.</p>
             </div>
 
-            <div class="col-md-4 center">
-                <h3> <a href="http://www.thehighlandinn.com">The Highland Inn</a></h3>
+            <div class="col-md-4 center padded">
+                <h3><a href="http://www.thehighlandinn.com">The Highland Inn</a></h3>
 
-                <p>644 N.Highland Ave</p>
-                <p>Atlanta, Ga 30306</p>
+                <p>644 North Highland Ave </p><p> Atlanta, Georgia 30306</p>
+
                 <p>404-874-5756 </p>
-                <p> A hotel for the true hipster. Complete with hemp toilet paper and
-                    vintage cigarette vending machine.
+
+                <p class="small"> A neighborhood hotel close to the wedding and reception. What it lacks in amenities
+                    it makes up for in character - especially the hotel clientele.
                     Walking distance to the wedding and reception.</p>
 
             </div>
@@ -119,7 +140,9 @@ $('#declining').change(function(){
 
 
 <section id="rsvp">
-    <header class="house"></header>
+    <header class="empirestate">
+        <p class="caption">Empire State South &nbsp&middot&nbsp July 2015</p>
+    </header>
     <div class="'container">
 
         <div class="row">
@@ -127,77 +150,129 @@ $('#declining').change(function(){
             <div class="center">
                 <h2> RSVP</h2>
 
-                <p>The favor of your reply is requested by August</p>
             </div>
         </div>
+
+
         <div class="row heading">
-            <div class="col-md-4">
+            <div class="col-xs-2 col-md-4">
 
             </div>
-            <div class="col-md-4">
 
-                <form id="RSVPform"  method="post" action="{{url_for('wedding.create_rsvp')}}">
-                    {{ form.hidden_tag() }}
-                    {% if form.id %}
-                    {{ form.id() }}
+            <div class="col-xs-8 col-md-4">
+
+                {% if my_rsvp %}
+                <div id="my_rsvp" class="center">
+                    <p> Thank you for your RSVP </p>
+
+                    <p><i> {{ my_rsvp.honorific }} {{ my_rsvp.name}}
+                        {% if my_rsvp.attending %}
+                        accept{% if my_rsvp.number ==1 %}s{% endif %}
+                        with pleasure
+                        {% else %}
+                        decline{% if my_rsvp.number ==1 %}s{% endif %} with regret
+                        {% endif %}
+                        the invitation to the wedding of Laura Beth Daniel and John Allen Edenfield
+                        on September 24th two thousand and sixteen to be held at 323 Josephine ST NE at
+                        four thirty pm.
+                    </i>
+                    </p>
+
+                    <p class="center"><a id="editRSVP" href="">edit</a></p>
+
+                </div>
+                {% endif %}
+
+                <div id="rsvp_form" {% if my_rsvp %} style="display:none;" {% endif %}>
+                    <p>The favor of your reply is requested by August</p>
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">looks Like there was a problem with your RSVP</div>
                     {% endif %}
-                    <div>
+
+                    <form id="submit_rspv" method="post" action="{{url_for('wedding.create_rsvp')}}">
+                        {{ form.hidden_tag() }}
+                        {% if form.id %}
+                        {{ form.id() }}
+                        {% endif %}
+                        <div>
                         <span>
-                        {{ form.honorific(style ="width:9%",placeholder="M")}}
-                        {{ form.name(style ="width:90%") }}
+                        {{ form.honorific(style ="width:15%",placeholder="M")}}
+                        {{ form.name(style ="width:80%") }}
                         </span>
-                    </div>
+                        </div>
 
-                    <div class="checkbox">
-                         <label>
-                            {{form.attending(type="checkbox")}}
-                            Attending with pleasure
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                         <label>
-                            {{form.declining(type="checkbox")}}
-                             Declines with regrets
-                        </label>
+                        <div class="checkbox">
+                            <label>
+                                {{form.attending(type="checkbox")}}
+                                Attending with pleasure
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                {{form.declining(type="checkbox")}}
+                                Declines with regrets
+                            </label>
 
 
-                    </div>
+                        </div>
 
-                    <div>
-                    <span>Number Attending {{ form.number(type="number",style ="width:50px", placeholder="1") }}
-                        <button type="'submit" class="btn btn-default pull-right">RSVP</button>
-                    </span>
-                    </div>
+                        <div>
+                            <label>
+                            Number Attending {{ form.number(type="number",style ="width:50px", value="1", min="0", max="2") }}
+                            </label>
+                        </div>
+                        <div class="center">
+                            <button type="'submit" class="btn btn-default">RSVP</button>
 
-                </form>
+                        </div>
+
+                    </form>
+                </div>
+
             </div>
+
         </div>
+
+
     </div>
 
 </section>
 
 
 <section id="registry">
-    <header class="house"></header>
+    <header class="SSI">
+        <p class="caption">St Simons Island Georgia,&nbsp&middot&nbsp November 2013 </p>
+    </header>
     <div class="'container">
         <div class="row heading">
-            <h2 class="center">Regestry </h2>
+            <div class="col-md-4 ">
+
+            </div>
+            <div class="col-md-4 center">
+                <h2>Registry </h2>
+
+                <p> We are registered at the following places. If you can't find anything you
+                    like then you are welcome to look through some of <a href="{{url_for('wedding.montana')}}">Montana's
+                        suggestions</a></p>
+            </div>
         </div>
         <div class="row heading">
 
             <div class="col-md-3 center">
-                <a href="https://www.amazon.com/registry/wedding/300P52EESJPGZ">Amazon</a>
+                <a class="registry" href="https://www.amazon.com/registry/wedding/300P52EESJPGZ">Amazon</a>
             </div>
             <div class="col-md-3 center">
-                <a href="https://www.anthropologie.com/anthro/registry/listing?registryId=ZDFLNZUXZWQ5">Anthropologie</a>
+                <a class="registry"
+                   href="https://www.anthropologie.com/anthro/registry/listing?registryId=ZDFLNZUXZWQ5">Anthropologie</a>
             </div>
             <div class="col-md-3 center">
-                <a href="http://www1.bloomingdales.com/registry/wedding/guest/?registryId=6497269">Bloomingdale's</a>
+                <a class="registry" href="http://www1.bloomingdales.com/registry/wedding/guest/?registryId=6497269">Bloomingdale's</a>
             </div>
 
 
             <div class="col-md-3 center">
-                <a href="http://www.crateandbarrel.com/gift-registry/laura-daniel-and-john-edenfield/r5441761"> Crate
+                <a class="registry"
+                   href="http://www.crateandbarrel.com/gift-registry/laura-daniel-and-john-edenfield/r5441761"> Crate
                     and Barrel</a>
             </div>
 
@@ -208,5 +283,43 @@ $('#declining').change(function(){
 </section>
 
 
+<section id="contactus">
+    <header class='vancouver'>
+        <p class="caption">Vancouver, BC &nbsp&middot&nbsp February 2014 </p>
+    </header>
+    <div class="'container">
+        <div class="row heading">
+            <div class="col-md-3 ">
+
+            </div>
+            <div class="col-md-6 center">
+                <h2>Contact Us </h2>
+                <p> Thank you for joining us and making this day special with the people we love most.
+                    Feel free to contact us with any questions.</p>
+                <p class="small"> Laura Daniel &nbsp&middot&nbsp 706-402-6789 &nbsp&middot&nbsp laurabethdaniel@gmail.com</p>
+                <p class="small"> John Edenfield &nbsp&middot&nbsp 404-455-9984 &nbsp&middot&nbsp edenfield.john@gmail.com</p>
+
+            </div>
+
+        </div>
+</section>
+
+
+{% if user.get_id() %}
+<div class="'container">
+
+    <div class="row">
+
+        <div class="center">
+            <a href="{{ url_for('wedding.rsvp_list') }}"> RSVP List</a>
+
+        </div>
+    </div>
+
 </div>
+
+
+{% endif %}
+
+
 {% endblock %}

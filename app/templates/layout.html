@@ -2,13 +2,15 @@
 <html>
 
 <head>
-    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
     <title>Laura and John</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Mako" />
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='custom/css/custom.css') }}"/>
 
@@ -19,7 +21,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
-
+    {% block head %}
     {% endblock %}
 
 </head>
@@ -36,7 +38,8 @@
 
 
 <div class="center">
-    <h4>&copy; Laura Daniel & John Edenfield</h4>
+    <a href="{{url_for('log_user_in') }}"><h4>&copy; Laura Daniel & John Edenfield </h4></a>
+
 </div>
 
 

@@ -1,0 +1,46 @@
+{% extends 'wedding_layout.html' %}
+
+{% block content %}
+
+<section>
+
+    <div class="container">
+        <h2>RSVP List</h2>
+        <table class="table center">
+            <tr >
+                <th class="center"> Name</th>
+                <th class="center"> Attending</th>
+                <th class="center"> Number</th>
+                <th class="center"> RSVP Created</th>
+                <th class="center"> RSVP Updated</th>
+
+            </tr>
+            {% for r in rsvp %}
+            <tr>
+                <td>{{r.honorific}} {{r.name}}</td>
+                <td>{% if r.attending %} yes
+                    {% else %}
+                    no
+
+                    {% endif %}
+
+                </td>
+                <td>{{r.number}}</td>
+                <td> {{r.created}}</td>
+                <td> {{r.updated}}</td>
+
+            </tr>
+
+
+            {% endfor %}
+
+
+
+        </table>
+
+
+    </div>
+</section>
+
+{% endblock %}
+
