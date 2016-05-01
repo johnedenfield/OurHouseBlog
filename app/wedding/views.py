@@ -62,4 +62,5 @@ def montana():
 @login_required
 def rsvp_list():
     rsvp = RSVP.all()
-    return render_template('rsvp_list.html', rsvp=rsvp)
+    attending =RSVP.number_attending()
+    return render_template('rsvp_list.html', rsvp=rsvp, attending=attending)

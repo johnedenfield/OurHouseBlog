@@ -1,6 +1,6 @@
 __author__ = 'johnedenfield'
 
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 from app import db
 
 import datetime
@@ -19,6 +19,10 @@ class RSVP(db.Model):
     @classmethod
     def all(cls):
         return RSVP.query.order_by(desc(RSVP.updated)).all()
+
+    @classmethod
+    def number_attending(cls):
+        return RSVP.query.with_entities(func.sum(RSVP.number)).filter(RSVP.attending==True).scalar()
 
     @classmethod
     def find_by_id(cls, id):

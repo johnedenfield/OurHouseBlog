@@ -141,3 +141,8 @@ def photo_delete(id):
 
     return redirect(url_for('house.article_edit', id=photo.post_id))
 
+
+@house.route('/floorplan', methods=['GET', 'POST'])
+def floor_plan():
+
+    return render_template('floor_plan.html')
