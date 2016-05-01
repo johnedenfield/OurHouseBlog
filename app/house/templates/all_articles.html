@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container">
 <header class="home_montana"></header>
-<p> We bought a house! A very old house. 107 years old to be exact.
+<p> We bought a house! A very old house. 108 years old to be exact.
     She has good bones and appears to have been well maintained.
     We believe we have the vision, the dedication, and the skills to bring this
     lovely old house to a beautiful new stage in her life and are very excited to take on this challenge.
@@ -15,8 +15,16 @@
 <p> - Laura, John & Montana</p>
 
 <h2>Our Progress</h2>
-<hr/>
-{%   for post in articles %}
+<hr>
+
+<section class="article">
+<h3><a href="{{url_for('house.floor_plan')}}">Floor Plan</a></h3>
+<p> We have added a floor plan to help visualize the layout of the house.</p>
+</section>
+
+
+
+{% for post in articles %}
 
 <section class="article">
 <h3><a href="{{ url_for('house.article_show', id=post.id) }}">{{ post.title }}</a></h3>

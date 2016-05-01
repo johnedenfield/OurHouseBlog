@@ -4,10 +4,9 @@ a {
 
 }
 
-
 a:active, a:hover {
-    font-weight:bold;
     text-decoration: none;
+    color:lightblue;
 
 }
 

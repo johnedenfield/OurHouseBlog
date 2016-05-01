@@ -1,13 +1,44 @@
 {% extends 'house_layout.html' %}
 {% block content %}
 <div class="container">
-<h2>Floor plan</h2>
+    <div class="row">
+        <h2>Floor plan</h2>
+        <p> The images below show the new (left) and existing (right) house floor plans. A majority of our work was focused
+            on opening up the front of the house. In the existing floor plan, the master bed room and closet were located directly
+            to  the left of the front door. These walls were removed to open up the front of the house. The existing master
+            bedroom now serves as a study/3rd bedroom. To keep with the open floor plan, we also moved the kitchen from
+            the back corner of the house to the existing dining room. The existing kitchen will then be converted to a 2nd bedroom.
+            All in all, this setup divides the house into public space in the front and private space in the back.
+         </p>
+        <p>
+            In the process of converting rooms and removing walls we also moved a number of windows. The existing dinning room windows
+            were moved to the new dinning room to allow for kitchen counter tops and  a new smaller casement window
+            was installed in their place. The existing master bedroom window was then
+            doubled up using the old south window. In addition, the small casement window located in the existing closet
+            was moved to the front of the house to create a group of 3 casement windows. These windows were shifted slightly to
+            align with the center of the new living room.</p>
+    </div>
 
+    <div class="row">
+        <div class="col-xs-6 center">
+            <h3>New Floor Plan</h3>
 
+            <p>back/east side of the house</p>
+            <img class='img-responsive' src="{{ url_for('static', filename='custom/css/1000px/NewFloorPlan.png') }}">
 
+            <p>front/west side of the house</p>
+        </div>
 
+        <div class="col-xs-6 center">
+            <h3>Existing Floor Plan</h3>
 
+            <p>back/east side of the house</p>
+            <img class='img-responsive'
+                 src="{{ url_for('static', filename='custom/css/1000px/ExistingFloorPlan.png') }}">
 
+            <p>front/west side of the house</p>
+        </div>
+    </div>
 
 
 </div>
