@@ -15,10 +15,16 @@
                 <th class="center"> RSVP Updated</th>
 
             </tr>
+
+
+
             {% for r in rsvp %}
             <tr>
                 <td>{{r.honorific}} {{r.name}}</td>
-                <td>{% if r.attending %} yes
+                <td>{% if r.attending %}
+                        yes
+
+
                     {% else %}
                     no
 
@@ -31,9 +37,16 @@
 
             </tr>
 
-
             {% endfor %}
 
+             {% set cnt = 1 %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{{cnt}}</td>
+                <td></td>
+                <td></td>
+            </tr>
 
 
         </table>

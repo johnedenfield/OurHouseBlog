@@ -28,9 +28,13 @@ $('#declining').change(function(){
 });
 
 
-if( !($('#attending').checked) && !($('#declining').checked)){
+if($('#attending').checked){
 
-    $('#attending').prop('checked',true);
+    $('#declining').prop('checked',false);
+}
+else if ($('#declining').checked){
+
+    $('#attending').prop('checked',false);
 }
 
 });
@@ -320,10 +324,12 @@ if( !($('#attending').checked) && !($('#declining').checked)){
             </div>
             <div class="col-md-6 center">
                 <h2>Contact Us </h2>
-                <p> Thank you for joining us on this special day. We are so greatful that we can spend this evenening
+                <p> Thank you for joining us on this special day. We are so greatful that we can spend this evening
                     with the people we love most. Feel free to contact us with any questions.</p>
-                <p class="small"> Laura Daniel &nbsp&middot&nbsp 706-402-6789 &nbsp&middot&nbsp laurabethdaniel@gmail.com</p>
-                <p class="small"> John Edenfield &nbsp&middot&nbsp 404-455-9984 &nbsp&middot&nbsp edenfield.john@gmail.com</p>
+                <p class="small"> Laura Daniel &nbsp&middot&nbsp 706-402-6789 &nbsp&middot&nbsp
+                <a href="mailto:laurabethdaniel@gmail.com">laurabethdaniel@gmail.com</a></p>
+                <p class="small"> John Edenfield &nbsp&middot&nbsp 404-455-9984 &nbsp&middot&nbsp
+                <a href="mailto:edenfield.john@gmail.com">edenfield.john@gmail.com</a></p>
 
             </div>
 

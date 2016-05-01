@@ -43,23 +43,6 @@ div.padded{
     padding: 0em 4em 0em 4em;
 }
 
-/* RSVP Form */
-#RSVPform div{
-    height: 2em;
-}
-
-#submit_rspv input[type=text] {
-    border: none;
-    border-bottom: 1px solid;
-
-}
-
-#submit_rspv input[type=number] {
-    border: none;
-    border-bottom: 1px solid;
-    width: 200px;
-    text-align: center;
-}
 
 /* Header Images */
 
@@ -121,6 +104,12 @@ header.empirestate {
     background-image: url("./1000px/empirestatesouth.jpg");
 }
 
+header.lagrange {
+    background-image: url("./1000px/lagrange.JPG");
+}
+
+
+
 @media (max-width: 400px) {
 
 header.home_montana {
@@ -156,6 +145,10 @@ header.bridge {
 
 header.empirestate {
     background-image: url("./400px/empirestatesouth.jpg");
+}
+
+header.lagrange {
+    background-image: url("./400px/lagrange.JPG");
 }
 
 
@@ -266,4 +259,24 @@ p.caption {
   -webkit-column-count: 1;
   column-count:         1;
   }
+}
+
+/* RSVP Form */
+#RSVPform div{
+    height: 2em;
+}
+
+#submit_rspv input[type=text] {
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+
+}
+
+#submit_rspv input[type=number] {
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    width: 200px;
+    text-align: center;
 }
