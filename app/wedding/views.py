@@ -49,7 +49,11 @@ def create_rsvp():
         expire_date=datetime.strptime('01-1-20','%m-%d-%y')
         response.set_cookie('User_id',value=str(my_rsvp.id), expires=expire_date)
 
+        flash('Thanks. We received your RSVP. You can <a href="#my_rsvp">edit</a> your RSVP anytime below',"bg-success")
         return response
+    else:
+
+        flash('There was an error in your RSVP. Please check <a href="#my_rsvp"> below</a>' ,"bg-danger")
 
     return render_template('wedding.html',form=form,user=current_user)
 

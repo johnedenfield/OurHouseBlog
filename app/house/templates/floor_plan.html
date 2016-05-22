@@ -2,6 +2,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
+        <div class="col-xs-12">
         <h2>Floor plan</h2>
         <p> The images below show the new (left) and existing (right) house floor plans. A majority of our work was focused
             on opening up the front of the house. In the existing floor plan, the master bed room and closet were located directly
@@ -17,6 +18,7 @@
             doubled up using the old south window. In addition, the small casement window located in the existing closet
             was moved to the front of the house to create a group of 3 casement windows. These windows were shifted slightly to
             align with the center of the new living room.</p>
+        </div>
     </div>
 
     <div class="row">
@@ -24,8 +26,9 @@
             <h3>New Floor Plan</h3>
 
             <p>back/east side of the house</p>
-            <img class='img-responsive' src="{{ url_for('static', filename='custom/css/1000px/NewFloorPlan.png') }}">
-
+            <a href="{{ url_for('static', filename='custom/css/1000px/NewFloorPlan.png') }}">
+                <img class='img-responsive' src="{{ url_for('static', filename='custom/css/1000px/NewFloorPlan.png') }}">
+            </a>
             <p>front/west side of the house</p>
         </div>
 
@@ -33,9 +36,10 @@
             <h3>Existing Floor Plan</h3>
 
             <p>back/east side of the house</p>
+            <a href="{{ url_for('static', filename='custom/css/1000px/ExistingFloorPlan.png') }}">
             <img class='img-responsive'
                  src="{{ url_for('static', filename='custom/css/1000px/ExistingFloorPlan.png') }}">
-
+            </a>
             <p>front/west side of the house</p>
         </div>
     </div>
