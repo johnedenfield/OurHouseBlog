@@ -13,8 +13,6 @@ wedding = Blueprint('wedding', __name__, template_folder='templates')
 def index():
 
     id = request.cookies.get('User_id')
-
-    print id
     my_rsvp = RSVP.find_by_id(id)
 
     if my_rsvp:
@@ -28,34 +26,33 @@ def index():
 @wedding.route('/rsvp', methods=['POST'])
 def create_rsvp():
 
-    if 'id' in request.form:
-        form = RSVPEditForm()
-        my_rsvp = RSVP.find_by_id(request.form['id'])
-
-    else:
-        form = RSVPForm()
-        my_rsvp = RSVP()
+    form = RSVPForm()
+    response= make_response(redirect(url_for('wedding.index')))
 
     if form.validate_on_submit():
 
+        my_rsvp = RSVP()
         form.populate_obj(my_rsvp)
         my_rsvp.updated = datetime.now()
 
         db.session.add(my_rsvp)
         db.session.commit()
 
-        response= make_response(redirect(url_for('wedding.index')))
-
         expire_date=datetime.strptime('01-1-20','%m-%d-%y')
         response.set_cookie('User_id',value=str(my_rsvp.id), expires=expire_date)
 
-        flash('Thanks. We received your RSVP. You can <a href="#my_rsvp">edit</a> your RSVP anytime below',"bg-success")
-        return response
+        flash('Thanks. We received your RSVP. <a href="#my_rsvp">You can edit your RSVP anytime below </a> ',"bg-success")
+
     else:
+        errstr = 'There was an error in your RSVP.'
+        for e in form.errors:
+              errstr=errstr + " "+  form.errors[e][0]
 
-        flash('There was an error in your RSVP. Please check <a href="#my_rsvp"> below</a>' ,"bg-danger")
+        errstr= errstr + ' </ul> <a href="#rsvp_form" > Please check below</a>'
+        flash(errstr,"bg-danger")
 
-    return render_template('wedding.html',form=form,user=current_user)
+    return response
+
 
 
 @wedding.route('/rsvp_list', methods=['POST','GET'])
@@ -75,11 +72,13 @@ def rsvp_edit(id):
         form = RSVPEditForm(obj=rsvp)
         return render_template('rsvp_edit.html', form=form)
 
-    if request.method == 'POST' and form.validate_on_submit(): # Save rsvp
+    if request.method == 'POST':
+        form = RSVPEditForm()
 
-        form.populate_obj(rsvp)
-        rsvp.updated = datetime.now()
-        db.session.add(rsvp)
-        db.session.commit()
+        if form.validate_on_submit(): # Save rsvp
+            form.populate_obj(rsvp)
+            rsvp.updated = datetime.now()
+            db.session.add(rsvp)
+            db.session.commit()
 
         return redirect(url_for('wedding.rsvp_list'))
