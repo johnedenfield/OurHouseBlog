@@ -18,7 +18,8 @@
 
             {% for r in rsvp %}
             <tr>
-                <td>{{r.name}}</td>
+                <td>  <a href="{{ url_for('wedding.rsvp_edit',id=r.id) }}">
+                    {{r.name}}  </a></td>
                 <td>{% if r.attending %}
                         yes
                     {% else %}

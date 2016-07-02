@@ -57,10 +57,6 @@ def create_rsvp():
 
     return render_template('wedding.html',form=form,user=current_user)
 
-@wedding.route('/montana', methods=['POST','GET'])
-def montana():
-    return render_template('montana.html')
-
 
 @wedding.route('/rsvp_list', methods=['POST','GET'])
 @login_required
@@ -68,3 +64,22 @@ def rsvp_list():
     rsvp = RSVP.all()
     attending =RSVP.number_attending()
     return render_template('rsvp_list.html', rsvp=rsvp, attending=attending)
+
+
+@wedding.route('/rsvp_list/edit/<id>', methods=['POST','GET'])
+@login_required
+def rsvp_edit(id):
+    rsvp = RSVP.find_by_id(id)
+
+    if request.method == 'GET': # Get rsvp for editing
+        form = RSVPEditForm(obj=rsvp)
+        return render_template('rsvp_edit.html', form=form)
+
+    if request.method == 'POST' and form.validate_on_submit(): # Save rsvp
+
+        form.populate_obj(rsvp)
+        rsvp.updated = datetime.now()
+        db.session.add(rsvp)
+        db.session.commit()
+
+        return redirect(url_for('wedding.rsvp_list'))

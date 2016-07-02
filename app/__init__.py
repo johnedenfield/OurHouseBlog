@@ -15,6 +15,7 @@ PASSWORD = 'default'
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 PHOTO_FOLDER = os.path.join(APP_ROOT, 'static','photos')
 
+
 app.config.from_object(__name__)
 db = SQLAlchemy(app)
 

@@ -1,0 +1,45 @@
+{% extends 'wedding_layout.html' %}
+
+{% block content %}
+
+ <div class="'container">
+
+<form id="submit_rspv" method="post" action="{{url_for('wedding.edit_rsvp',id=form.id)}}">
+    {{ form.hidden_tag() }}
+    <div>
+    <span>
+
+        {{ form.name(style ="width:98%") }}
+
+    </span>
+    </div>
+
+    <div class="checkbox">
+        <label>
+            {{form.attending(type="checkbox")}}
+            Attending with pleasure
+        </label>
+    </div>
+    <div class="checkbox">
+        <label>
+            {{form.declining(type="checkbox")}}
+            Declines with regret
+        </label>
+
+
+    </div>
+
+    <div>
+        <label>
+        Number Attending
+        {{ form.number(type="number",style ="width:50px", value="1", min="0", max="2") }}
+        </label>
+    </div>
+    <div class="center">
+        <button type="'submit" class="btn btn-default">RSVP</button>
+
+    </div>
+
+</form>
+</div>
+{% endblock %}
