@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, NumberRange
 
 
 class RSVPForm(Form):
-    honorific = StringField('Name',validators=[DataRequired(message="Please tell us how you would like to be addressed (Mr, Mrs, Miss)" )])
+    honorific = StringField('Name') # Not in use. Use Name field only
     name = StringField('Name',validators=[DataRequired(message="Please enter you and your guests name ")])
     attending = BooleanField('Attending')
     declining = BooleanField('Decline ')

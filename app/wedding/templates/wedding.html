@@ -188,7 +188,7 @@ else if ($('#declining').checked){
                 <div id="my_rsvp" class="center">
                     <p> Thank you for your RSVP </p>
 
-                    <p><i> {{ my_rsvp.honorific }} {{ my_rsvp.name}}
+                    <p><i> {{ my_rsvp.name}}
                         {% if my_rsvp.attending %}
                         accept{% if my_rsvp.number ==1 %}s{% endif %}
                         with pleasure
@@ -227,7 +227,7 @@ else if ($('#declining').checked){
                         {% endif %}
                         <div>
                         <span>
-
+                        <!-- Remove Honorific as input
                         {% if form.honorific.errors %}
 
                             {{ form.honorific(style ="width:15%",placeholder="M",class_="alert-danger")}}
@@ -236,12 +236,13 @@ else if ($('#declining').checked){
                             {{ form.honorific(style ="width:15%",placeholder="M")}}
 
                         {% endif %}
+                        -->
 
                         {% if form.name.errors %}
-                             {{ form.name(style ="width:80%", class_="alert-danger") }}
+                             {{ form.name(style ="width:98%", class_="alert-danger") }}
 
                         {% else %}
-                            {{ form.name(style ="width:80%") }}
+                            {{ form.name(style ="width:98%") }}
 
                          {% endif %}
 
