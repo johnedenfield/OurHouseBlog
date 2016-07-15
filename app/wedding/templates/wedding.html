@@ -52,21 +52,6 @@ else if ($('#declining').checked){
 
 {% block content %}
 
- <div class="'container">
-{% with messages = get_flashed_messages(with_categories=true) %}
- {% if messages %}
-
-    {% for category, message in messages %}
-     <div class="row heading {{category}}">
-      <p class=" center">{{ message|safe }}</p>
-    </div>
-    {% endfor %}
-
-  {% endif %}
-{% endwith %}
-
-</div>
-
 
 <section id="ceremony">
     <header class="bridge">
@@ -78,7 +63,7 @@ else if ($('#declining').checked){
             <h2>Ceremony</h2>
 
             <p> September 24, 2016 </p>
-            <p> Arrive 4:00pm &nbsp&middot&nbsp Vows 4:30pm</p></p>
+            <p> Arrive 4:00pm &nbsp&middot&nbsp Vows 4:30pm</p>
 
             <p>Backyard Garden &nbsp&middot&nbsp 323 Josephine St &nbsp&middot&nbsp Atlanta, Georgia</p>
 
@@ -162,7 +147,7 @@ else if ($('#declining').checked){
 </section>
 
 
-<section id="rsvp">
+<section >
     <header class="empirestate">
         <p class="caption">Empire State South &nbsp&middot&nbsp July 2015</p>
     </header>
@@ -170,7 +155,7 @@ else if ($('#declining').checked){
 
         <div class="row">
 
-            <div class="center">
+            <div id="rsvp" class="center">
                 <h2> RSVP</h2>
 
             </div>

@@ -28,6 +28,8 @@ def create_rsvp():
 
     form = RSVPForm()
     response= make_response(redirect(url_for('wedding.index')))
+    # modify header to redirect to location on page of rsvp
+    response.headers['location'] = response.headers['location'] +'#rsvp'
 
     if form.validate_on_submit():
 
@@ -40,16 +42,6 @@ def create_rsvp():
 
         expire_date=datetime.strptime('01-1-20','%m-%d-%y')
         response.set_cookie('User_id',value=str(my_rsvp.id), expires=expire_date)
-
-        flash('Thanks. We received your RSVP. <a href="#my_rsvp">You can edit your RSVP anytime below </a> ',"bg-success")
-
-    else:
-        errstr = 'There was an error in your RSVP.'
-        for e in form.errors:
-              errstr=errstr + " "+  form.errors[e][0]
-
-        errstr= errstr + ' </ul> <a href="#rsvp_form" > Please check below</a>'
-        flash(errstr,"bg-danger")
 
     return response
 

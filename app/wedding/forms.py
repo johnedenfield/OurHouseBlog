@@ -9,7 +9,7 @@ class RSVPForm(Form):
     name = StringField('Name',validators=[DataRequired(message="Please enter you and your guests name ")])
     attending = BooleanField('Attending')
     declining = BooleanField('Decline ')
-    number = IntegerField('Number of guests',validators=[DataRequired(),NumberRange(0,2,'Please let us know the the total number attending')])
+    number = IntegerField('Number of guests',validators=[NumberRange(0,2,'Please let us know the the total number attending')])
 
 class RSVPEditForm(RSVPForm):
     id = HiddenField()
